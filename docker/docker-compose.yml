@@ -31,6 +31,10 @@ services:
     build:
       context: ../
       dockerfile: ./docker/ppl-dev/Dockerfile
+      args:
+        PLATFORM: ${PLATFORM}
+    platform:
+      linux/amd64
       # args:
       #   - DOCKERFILE_COMMIT_SHORT_SHA
     volumes:
@@ -45,11 +49,11 @@ services:
       - ppl-data:/root
     network_mode: bridge
     # extra_hosts:
-      # - "o2ac-ur:127.0.0.1"   # This container assumes that it is used standalone (no other PCs that need to be addressed)
-      # - "o2ac-ur:192.168.2.5" # The host PC
-      # - "o2ac-vision-pc:192.168.2.6" # The PC with the cameras and vision nodes
-      # - "a_bot:192.168.1.41"
-      # - "b_bot:192.168.1.42"
+    # - "o2ac-ur:127.0.0.1"   # This container assumes that it is used standalone (no other PCs that need to be addressed)
+    # - "o2ac-ur:192.168.2.5" # The host PC
+    # - "o2ac-vision-pc:192.168.2.6" # The PC with the cameras and vision nodes
+    # - "a_bot:192.168.1.41"
+    # - "b_bot:192.168.1.42"
     command: /root/ppl_ws/docker/ppl-dev/scripts/initialize-docker-container.sh
     shm_size: 1g # a PhoXi data size about 100MB.
 

@@ -64,14 +64,6 @@ RUN apt-add-repository 'deb https://apt.kitware.com/ubuntu/ focal main'
 RUN apt update
 RUN apt-get -y install cmake
 
-#download and build vcpkg
-RUN mkdir -p /opt \
-    && git clone https://github.com/Microsoft/vcpkg.git /opt/vcpkg \
-    && chmod 777 /opt/vcpkg
-WORKDIR /opt/vcpkg
-RUN ./bootstrap-vcpkg.sh \
-    && chmod 666 .vcpkg-root
-
 # Install qt4
 RUN add-apt-repository -y ppa:rock-core/qt4
 RUN apt-get update && apt-get install -y --no-install-recommends \
