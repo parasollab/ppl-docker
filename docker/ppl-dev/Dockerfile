@@ -14,7 +14,7 @@ RUN  apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
         tzdata \
         build-essential gdb \
-        python gperf libclang-dev \
+        python3 python3-pip gperf libclang-dev \
         gfortran \
         ninja-build \
         pkg-config \
@@ -51,7 +51,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     less \
     usbutils \
     && rm -rf /var/lib/apt/lists/*
-        
+
+# Install conan 2
+RUN pip3 install --upgrade pip 
+RUN pip3 install conan
+RUN conan profile detect
+
 # install latest cmake > 3.24
 RUN wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | tee /usr/share/keyrings/kitware-archive-keyring.gpg >/dev/null \ 
     && echo 'deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ focal main' | tee /etc/apt/sources.list.d/kitware.list >/dev/null
@@ -67,11 +72,6 @@ WORKDIR /opt/vcpkg
 RUN ./bootstrap-vcpkg.sh \
     && chmod 666 .vcpkg-root
 
-#Copy source code from host system
-RUN mkdir -p /root/ppl_ws
-# COPY . /root/ppl_ws
-RUN git clone https://github.com/parasollab/open-ppl.git ppl
-
 # Install qt4
 RUN add-apt-repository -y ppa:rock-core/qt4
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -80,10 +80,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libqt4-opengl \
     libqt4-opengl-dev
 
+# Setup workdir
+RUN mkdir -p /root/ppl_ws
+WORKDIR /root/ppl_ws
+
+# Clone open-ppl
+RUN git clone https://github.com/parasollab/open-ppl.git ppl
 
 # Clone open-ppl-utils
-WORKDIR /root/ppl_ws
 RUN git clone https://github.com/parasollab/open-ppl-utils.git pmpl_utils
+
+# Clone open-ppl-env (Benchmarks)
+RUN git clone https://github.com/parasollab/open-ppl-env.git
 
 # Clone Vizmo
 RUN git clone https://github.com/parasollab/vizmo.git -b ubuntu-20-04 vizmo

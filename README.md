@@ -19,7 +19,7 @@ Packages PPL (Release-stage-two) and Vizmo in a Docker container.
 ### 3. Build PPL inside container
 
 ```sh
-build-ppl
+build-ppl-conan
 ```
 
 ### 4. Build Vizmo inside container

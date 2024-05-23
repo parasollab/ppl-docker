@@ -27,15 +27,21 @@ umask 0002
 
 # Define Bash functions to conveniently execute the helper scripts in the current shell process.
 
-function build-ppl () {
+function build-ppl-vcpkg () {
   # Store the current directory and execute scripts in the current shell process.
   pushd .
   echo "Fixing permission issues..."
   source /root/ppl_ws/docker/ppl-dev/scripts/fix-permission-issues.sh
-  echo "Building vcpkg dependencies..."
-  source /root/ppl_ws/docker/ppl-dev/scripts/build-vcpkg.sh
-  echo "Building PPL..."
-  source /root/ppl_ws/docker/ppl-dev/scripts/build-ppl.sh
+  echo "Building PPL with vcpkg..."
+  source /root/ppl_ws/docker/ppl-dev/scripts/build-ppl-vcpkg.sh
+  popd
+}
+
+function build-ppl-conan () {
+  # Store the current directory and execute scripts in the current shell process.
+  pushd .
+  source /root/ppl_ws/docker/ppl-dev/scripts/fix-permission-issues.sh
+  source /root/ppl_ws/docker/ppl-dev/scripts/build-ppl-conan.sh
   popd
 }
 
@@ -45,15 +51,6 @@ function build-vizmo () {
   source /root/ppl_ws/ppl_ws/docker/ppl-dev/scripts/fix-permission-issues.sh
   source /root/ppl_ws/docker/ppl-dev/scripts/build-vizmo.sh
   popd
-}
-
-function build-workspace () {
-  # Store the current directory and execute scripts in the current shell process.
-  pushd .
-  source /root/ppl_ws/docker/ppl-dev/scripts/fix-permission-issues.sh
-  source /root/ppl_ws/docker/ppl-dev/scripts/build-workspace.sh
-  popd
-
 }
 
 function fix-permission-issues () {
@@ -68,40 +65,10 @@ function fix-permission-issues () {
 
 # aliases
 
-alias cp='cd /root/ppl_ws/ppl'
-alias cps='cd /root/ppl_ws/ppl/src'
-alias cpu='cd /root/ppl_ws/pmpl_utils'
-alias cpv='cd /root/ppl_ws/vizmo'
-# alias cb='colcon build --symlink-install --cmake-args "-DCMAKE_BUILD_TYPE=Release"'
-# alias cc='catkin clean'
-# alias s='source /root/ppl_ws/ppl_cc_ws/install/setup.bash'
-
-# alias rd='rosdep install -i --from-paths'
-# alias rqt_plot='ros2 run rqt_plot rqt_plot'
-# alias rqt_reconfigure='ros2 run rqt_reconfigure rqt_reconfigure'
-# alias rqt_tf_tree='ros2 run rqt_tf_tree rqt_tf_tree'
-
-###############################################################################
-
-# PhoXi settings
-
-# if [ -d /opt/PhotoneoPhoXiControl-1.2.14 ]; then
-#   export PHOXI_CONTROL_PATH=/opt/PhotoneoPhoXiControl-1.2.14
-#   export PATH=${PATH}:${PHOXI_CONTROL_PATH}/bin
-#   export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${PHOXI_CONTROL_PATH}/API/lib
-#   export CPATH=${CPATH}:${PHOXI_CONTROL_PATH}/API/include
-# fi
-
-###############################################################################
-
-# PhoLocalizationSDK settings
-
-# if [ -d /opt/PhotoneoSDK/Localization ]; then
-#   export PHO_LOCALIZATION_PATH=/opt/PhotoneoSDK/Localization
-#   export PATH=${PATH}:${PHO_LOCALIZATION_PATH}/bin
-#   export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${PHO_LOCALIZATION_PATH}/lib
-#   export CPATH=${CPATH}:${PHO_LOCALIZATION_PATH}/include
-# fi
+alias goppl='cd /root/ppl_ws/ppl'
+alias goppls='cd /root/ppl_ws/ppl/src'
+alias gopplu='cd /root/ppl_ws/pmpl_utils'
+alias goviz='cd /root/ppl_ws/vizmo'
 
 ################################################################################
 
