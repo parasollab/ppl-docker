@@ -42,6 +42,7 @@ services:
       # - /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket
       # Grant access to serial usb ports for u2d2
       # - /dev/:/dev/
+      - ppl-data:/root
     network_mode: bridge
     # extra_hosts:
       # - "o2ac-ur:127.0.0.1"   # This container assumes that it is used standalone (no other PCs that need to be addressed)
@@ -51,3 +52,7 @@ services:
       # - "b_bot:192.168.1.42"
     command: /root/ppl_ws/docker/ppl-dev/scripts/initialize-docker-container.sh
     shm_size: 1g # a PhoXi data size about 100MB.
+
+volumes:
+  ppl-data:
+    external: false
