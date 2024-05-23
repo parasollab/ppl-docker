@@ -28,6 +28,25 @@ build-ppl-conan
 build-vizmo
 ```
 
+### 5. Test to see if everything build properly
+
+```sh
+goppl
+```
+
+```sh
+./build/ppl_mp -f Examples/CfgExamples.xml
+```
+
+```sh
+goviz
+```
+
+```sh
+./vizmo++
+```
+TODO
+
 ## Stop docker container
 
 To stop the docker container run:
