@@ -28,3 +28,18 @@ build-ppl-conan
 build-vizmo
 ```
 
+## Stop docker container
+
+To stop the docker container run:
+
+```sh
+docker stop $USER-ppl-1
+```
+
+## Deleting Containers
+
+To delete all docker containers (docker cache) run:
+
+```sh
+docker system prune -a
+```
