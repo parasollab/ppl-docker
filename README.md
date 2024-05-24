@@ -26,34 +26,41 @@ If you have a mac with an apple silicon processor (e.g. M1 chips or later), open
 ./RUN-DOCKER-CONTAINER.sh
 ```
 
-### 3. Build PPL inside container
+### 3. Create a SSH key
 
 ```sh
-build-ppl-conan
+ssh-keygen
 ```
 
-### 4. Build Vizmo inside container
+### 4. Add the SSH key to your GitHub account and Authorize the Parasol organization
+
+### 5. Clone the PPL repository
+
+```sh
+git clone https://github.com/parasollab/ppl.git -b <branch_name> ppl
+```
+
+### 6. Build PPL
+```sh
+cd /root/ppl_ws/ppl
+```
+
+```sh
+ln -s /root/ppl_ws/pmpl_utils
+```
+
+```sh
+cd /root/ppl_ws/ppl/src
+```
+
+```sh
+make -j3
+```
+
+### 7. Build Vizmo
 
 ```sh
 build-vizmo
-```
-
-### 5. Test to see if everything build properly
-
-```sh
-goppl
-```
-
-```sh
-./build/ppl_mp -f Examples/CfgExamples.xml
-```
-
-```sh
-goviz
-```
-
-```sh
-./vizmo++
 ```
 
 TODO
