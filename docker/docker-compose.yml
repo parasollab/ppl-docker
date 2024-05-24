@@ -47,7 +47,7 @@ services:
       # Grant access to serial usb ports for u2d2
       # - /dev/:/dev/
       - ppl-data:/root
-    network_mode: bridge
+    network_mode: host
     # extra_hosts:
     # - "o2ac-ur:127.0.0.1"   # This container assumes that it is used standalone (no other PCs that need to be addressed)
     # - "o2ac-ur:192.168.2.5" # The host PC
