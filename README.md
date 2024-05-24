@@ -10,7 +10,7 @@ If you don't have Docker Desktop installed, download and install it using [this 
 
 #### Apple Silicon
 
-If you have a mac with an apple silicon processor (e.g. M1 chips or later), open the settings in the Docker app and check to make sure that the option for **Use Rosetta for x86_64/amd64 emulation on Apple Silicon** is enabled.
+If you have a mac with an apple silicon processor (e.g. M1 chips or later), open the settings in the Docker app and check to make sure that the option for **Use Rosetta for x86_64/amd64 emulation on Apple Silicon** is enabled. Additionally, install [XQuartz](https://www.xquartz.org/) and in the XQuartz settings, make sure that **Allow connections from network clients** is enabled.
 
 ### 1. Build docker image
 
