@@ -26,6 +26,21 @@ If you have a mac with an apple silicon processor (e.g. M1 chips or later), open
 ./RUN-DOCKER-CONTAINER.sh
 ```
 
+### 2.1. Create your SSH key
+```sh
+make-ssh-key {your-email-address}
+```
+
+### 2.2 Add your SSH key to Github and allow Parasollab permissions
+See [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) for instructions. \
+
+Be sure to click the "Configure SSO" dropdown and allow parasollab to access the new key. 
+
+### 2.3 Clone PPL. 
+```sh
+clone-hasrrt
+```
+
 ### 3. Build PPL inside container
 
 ```sh
