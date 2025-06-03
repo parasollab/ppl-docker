@@ -60,6 +60,24 @@ function fix-permission-issues () {
   popd
 }
 
+function clone-hasrrt() {
+  pushd .
+  source /root/ppl_ws/docker/ppl-dev/scripts/clone-hasrrt.sh
+  popd
+}
+
+function make-ssh-key() {
+  if [ "$#" -ne 1 ]; then
+      echo "Usage: $0 <email-address>"
+      exit 1
+  fi
+
+  EMAIL="$1"
+  pushd .
+  source /root/ppl_ws/docker/ppl-dev/scripts/make-ssh-key.sh $EMAIL
+  popd
+}
+
 
 ###############################################################################
 

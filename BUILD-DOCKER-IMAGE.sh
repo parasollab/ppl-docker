@@ -26,4 +26,4 @@ else
 fi
 
 # Build the Docker image
-docker-compose -p ${DOCKER_PROJECT} -f ./docker/docker-compose.yml build
+docker compose -p ${DOCKER_PROJECT} -f ./docker/docker-compose.yml build

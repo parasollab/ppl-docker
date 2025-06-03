@@ -76,15 +76,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN mkdir -p /root/ppl_ws
 WORKDIR /root/ppl_ws
 
-# Clone open-ppl
-RUN git clone https://github.com/parasollab/open-ppl.git ppl
-
-# Clone open-ppl-utils
-RUN git clone https://github.com/parasollab/open-ppl-utils.git pmpl_utils
-
-# Clone open-ppl-env (Benchmarks)
-RUN git clone https://github.com/parasollab/open-ppl-env.git
-
 # Clone Vizmo
 RUN git clone https://github.com/parasollab/vizmo.git -b ubuntu-20-04 vizmo
 
