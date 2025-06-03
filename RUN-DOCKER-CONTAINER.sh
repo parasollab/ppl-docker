@@ -21,7 +21,20 @@ docker compose -p ${PROJECT} -f ./docker/docker-compose.yml up -d
 
 # Display GUI through X Server by granting full access to any external client.
 # Get the host IP address
-HOST_IP=$(ipconfig getifaddr en0)
+OS_TYPE="$(uname)"
+
+if [ "$OS_TYPE" == "Darwin" ]; then
+    # macOS
+    IP_ADDRESS=$(ipconfig getifaddr eth0)
+elif [ "$OS_TYPE" == "Linux" ]; then
+    # Linux
+    IP_ADDRESS=$(hostname -I | awk '{print $1}')
+else
+    echo "Unsupported operating system: $OS_TYPE"
+    exit 1
+fi
+
+HOST_IP=$IP_ADDRESS
 xhost +
 
 ################################################################################
