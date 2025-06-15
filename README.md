@@ -48,7 +48,7 @@ Comment out line 33 from conanfile.py. With vim, you can do this as:
 goppl
 vim conanfile.py
 ```
-Then type:`esc :33` (enter), `i`, `#`, `esc : wq`
+Then type:`(esc) :33` (enter), `i`, `#`, `(esc) : wq`
 
 ```sh
 build-ppl-conan
