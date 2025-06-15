@@ -50,6 +50,8 @@ vim conanfile.py
 ```
 Then type:`(esc) :33` (enter), `i`, `#`, `(esc) : wq`
 
+Do the same for line 42. 
+
 ```sh
 build-ppl-conan
 ```
