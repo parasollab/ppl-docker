@@ -42,6 +42,13 @@ clone-hasrrt
 ```
 
 ### 3. Build PPL inside container
+First, fix boost:
+Comment out line 33 from conanfile.py. With vim, you can do this as:
+```sh
+goppl
+vim conanfile.py
+```
+Then type:`esc :33` (enter), `i`, `#`, `esc : wq`
 
 ```sh
 build-ppl-conan
