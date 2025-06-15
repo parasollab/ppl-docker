@@ -52,6 +52,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     usbutils \
     && rm -rf /var/lib/apt/lists/*
 
+
 # Install conan 2
 RUN pip3 install --upgrade pip 
 RUN pip3 install conan
@@ -71,6 +72,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     qt4* \
     libqt4-opengl \
     libqt4-opengl-dev
+
+# install boost?
+RUN apt-get update && apt-get install -y libbullet-dev
 
 # Setup workdir
 RUN mkdir -p /root/ppl_ws
