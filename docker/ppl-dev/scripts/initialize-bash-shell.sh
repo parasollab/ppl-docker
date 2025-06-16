@@ -38,10 +38,18 @@ function build-ppl-vcpkg () {
 }
 
 function build-ppl-conan () {
+  if [ "$#" -ne 1 ]; then
+      echo "Usage: $0 {ppl_directory}"
+      exit 1
+  fi
+
+  PPLDIR=$1
+
+
   # Store the current directory and execute scripts in the current shell process.
   pushd .
   source /root/ppl_ws/docker/ppl-dev/scripts/fix-permission-issues.sh
-  source /root/ppl_ws/docker/ppl-dev/scripts/build-ppl-conan.sh
+  source /root/ppl_ws/docker/ppl-dev/scripts/build-ppl-conan.sh $PPLDIR
   popd
 }
 
