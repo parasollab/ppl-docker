@@ -72,13 +72,35 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     qt4* \
     libqt4-opengl \
     libqt4-opengl-dev
+    
 
-# install boost?
+# install boost and libpng
 RUN apt-get update && apt-get install -y libbullet-dev
+RUN apt-get update && apt-get install -y libpng-dev
+# update C++
+RUN add-apt-repository ppa:ubuntu-toolchain-r/test -y && \
+    apt-get update && \
+    apt-get install -y gcc-11 g++-11 && \
+    update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 100 && \
+    update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-11 100
+# create the conan hooks to make some of these libs compile on earlier cmake versions:
+RUN mkdir -p /root/.conan2/extensions/hooks
+COPY docker/hooks/hook_fix_cmake_version.py /root/.conan2/extensions/hooks/
+RUN echo "hook file moved. "
+
 
 # Setup workdir
 RUN mkdir -p /root/ppl_ws
 WORKDIR /root/ppl_ws
+
+# Clone open-ppl
+RUN git clone https://github.com/parasollab/open-ppl.git ppl
+
+# Clone open-ppl-utils
+RUN git clone https://github.com/parasollab/open-ppl-utils.git pmpl_utils
+
+# Clone open-ppl-env (Benchmarks)
+RUN git clone https://github.com/parasollab/open-ppl-env.git
 
 # Clone Vizmo
 RUN git clone https://github.com/parasollab/vizmo.git -b ubuntu-20-04 vizmo
