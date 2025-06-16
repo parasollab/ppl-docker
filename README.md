@@ -42,6 +42,7 @@ clone-hasrrt
 ```
 
 ### 3. Build PPL inside container - just the HASRRT branch
+(if this step results in an error, try running #4 first and coming back to this)
 ```sh
 cd ~/ppl_ws/hasrrt-ppl
 build-ppl-conan hasrrt-ppl
