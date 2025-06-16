@@ -36,29 +36,22 @@ See [here](https://docs.github.com/en/authentication/connecting-to-github-with-s
 
 Be sure to click the "Configure SSO" dropdown and allow parasollab to access the new key. 
 
-### 2.3 Clone PPL. 
+### 2.3 Clone HASRRT's branch of PPL. 
 ```sh
 clone-hasrrt
 ```
 
-### 3. Build PPL inside container
-First, fix boost:
-Comment out line 33 from conanfile.py. With vim, you can do this as:
+### 3. Build PPL inside container - just the HASRRT branch
 ```sh
-goppl
-vim conanfile.py
-```
-Then type:`(esc) :33` (enter), `i`, `#`, `(esc) : wq`
-
-Do the same for line 42 (libpng). 
-
-```sh
-build-ppl-conan
+cd ~/ppl_ws/hasrrt-ppl
+build-ppl-conan hasrrt-ppl
 ```
 
 ### 4. Build Vizmo inside container
 
 ```sh
+goppl
+build-ppl-conan ppl
 build-vizmo
 ```
 
@@ -80,7 +73,12 @@ goviz
 ./vizmo++
 ```
 
-TODO
+### 6. Run the HASRRT experiments 
+```sh
+navigate to the hasrrt-experiments folder (repo was cloned when running clone-hasrrt)
+
+Use ./ppl_mp -f SimplePassage.xml to run an experiment.
+```
 
 ## Stop docker container
 
