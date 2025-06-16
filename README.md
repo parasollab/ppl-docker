@@ -47,6 +47,8 @@ cd ~/ppl_ws/hasrrt-ppl
 build-ppl-conan hasrrt-ppl
 ```
 
+**There are now 2 versions of ppl: one in the folder called "ppl" and the other in the folder called "hasrrt-ppl". This is an unfortunate necessity. hasrrt-ppl is the only branch that has HAS-RRT, and ppl is the only branch that will work with vizmo. **
+
 ### 4. Build Vizmo inside container
 
 ```sh
@@ -76,6 +78,8 @@ goviz
 ### 6. Run the HASRRT experiments 
 ```sh
 navigate to the hasrrt-experiments folder (repo was cloned when running clone-hasrrt)
+Follow the setup instructions here: https://github.com/parasollab/hasrrt-experiments/tree/sp25.
+Your ppl executable should be called ppl_mp and should be in the hasrrt-ppl/build folder. 
 
 Use ./ppl_mp -f SimplePassage.xml to run an experiment.
 ```
