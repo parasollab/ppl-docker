@@ -56,6 +56,7 @@ build-ppl-conan hasrrt-ppl
 goppl
 build-ppl-conan ppl
 build-vizmo
+(there might be a bug.. unsure. )
 ```
 
 ### 5. Test to see if everything build properly
