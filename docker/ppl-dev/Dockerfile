@@ -65,6 +65,9 @@ RUN apt-add-repository 'deb https://apt.kitware.com/ubuntu/ focal main'
 RUN apt update
 RUN apt-get -y install cmake
 
+# for version fixing scripts... 
+RUN apt-get -y install bc 
+
 # Install qt4
 RUN add-apt-repository -y ppa:rock-core/qt4
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -105,9 +108,6 @@ RUN git clone https://github.com/parasollab/open-ppl-env.git
 # Clone Vizmo
 RUN git clone https://github.com/parasollab/vizmo.git -b ubuntu-20-04 vizmo
 
-# Clone Vizmo PPL package
-WORKDIR /root/ppl_ws/vizmo
-RUN git clone https://github.com/parasollab/open-ppl.git --depth 1 --branch vizmo pmpl
 
 # Setup soflinks
 WORKDIR /root/ppl_ws/vizmo/pmpl
