@@ -77,12 +77,18 @@ function clone-hasrrt() {
 function make-ssh-key() {
   if [ "$#" -ne 1 ]; then
       echo "Usage: $0 <email-address>"
-      exit 1
+      return 1
   fi
 
   EMAIL="$1"
   pushd .
   source /root/ppl_ws/docker/ppl-dev/scripts/make-ssh-key.sh $EMAIL
+  popd
+}
+
+function fix-cmake-versions () {
+  pushd . 
+  source /root/ppl_ws/docker/ppl-dev/scripts/fix-cmake-versions.sh .
   popd
 }
 
