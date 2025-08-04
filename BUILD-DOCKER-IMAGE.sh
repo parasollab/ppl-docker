@@ -2,9 +2,9 @@
 # If no argument is given, use the current user name as the project name.
 DOCKER_PROJECT=$1
 if [ -z "${DOCKER_PROJECT}" ]; then
-  DOCKER_PROJECT=${USER}
+  DOCKER_PROJECT=${USER}-vizmo
 fi
-DOCKER_CONTAINER="${DOCKER_PROJECT}-ppl-1"
+DOCKER_CONTAINER="${DOCKER_PROJECT}-ppl-vizmo-1"
 # echo "$0: DOCKER_PROJECT=${DOCKER_PROJECT}"
 # echo "$0: DOCKER_CONTAINER=${DOCKER_CONTAINER}"
 

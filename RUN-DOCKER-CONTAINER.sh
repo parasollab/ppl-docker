@@ -6,10 +6,10 @@
 # If no argument is given, use the current user name as the project name.
 PROJECT=$1
 if [ -z "${PROJECT}" ]; then
-  PROJECT=${USER}
+  PROJECT=${USER}-vizmo
 fi
 CONTAINER="${PROJECT}-ppl-1"
-echo "$0: PROJECT=${CONTAINER}"
+echo "$0: CONTAINER=${CONTAINER}"
 
 ################################################################################
 
