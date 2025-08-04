@@ -108,9 +108,13 @@ RUN git clone https://github.com/parasollab/open-ppl-env.git
 # Clone Vizmo
 RUN git clone https://github.com/parasollab/vizmo.git -b ubuntu-20-04 vizmo
 
+# CLONE PMPL FOR INSIDE VIZMO
+WORKDIR /root/ppl_ws/vizmo
+RUN git clone https://github.com/parasollab/open-ppl.git --depth 1 --branch ubuntu-20-04-vizmo ppl
+
 
 # Setup soflinks
-WORKDIR /root/ppl_ws/vizmo/pmpl
+WORKDIR /root/ppl_ws/vizmo/ppl
 RUN ln -s /root/ppl_ws/pmpl_utils
 
 # Copy the helper scripts to the working directory.
@@ -126,20 +130,22 @@ RUN sed -i 's/#force_color_prompt=yes/force_color_prompt=yes/' /root/.bashrc
 
 #Build ppl executables
 WORKDIR /root/ppl_ws/ppl
-# RUN /root/ppl_ws/docker/ppl-dev/scripts/build-ppl-conan.sh ppl
 RUN conan install . --output-folder=build --profile:build=default -c tools.system.package_manager:mode=install  -c tools.build:jobs=8  -s compiler.cppstd=gnu17 -s build_type=Debug --build missing  -g CMakeDeps  -g CMakeToolchain 
 RUN sed -i -e 's/cmake_policy(SET CMP0048 OLD)/cmake_policy(SET CMP0048 NEW)/g' lib/PQP/CMakeLists.txt
 RUN cmake -B build -S . -G  Ninja -DCMAKE_TOOLCHAIN_FILE=build/conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Debug -DCODE_COVERAGE=OFF -DBUILD_DOCS=OFF -DCMAKE_POLICY_VERSION_MINIMUM=3.5
 RUN cmake --build build 
 
-# # Build vizmo executable
-# WORKDIR /root/ppl_ws/vizmo/
-# RUN git clone https://github.com/parasollab/open-ppl.git --depth 1 --branch ubuntu-20-04-vizmo ppl
-# RUN cd ../pmpl_utils
-# RUN /root/ppl_ws/docker/ppl-dev/scripts/fix-cmake-version.sh
-# RUN cd ../src
-# RUN make -j4
-# || true overrides error
+# Build vizmo executable
+WORKDIR /root/ppl_ws/vizmo/src
+RUN make -j4 || true 
+#  || true overrides the CMAKE POLICY VERSION error that we are going to fix. 
+# ( we need to do this because `make` clones a bunch of git stuff .. )
+WORKDIR /root/ppl_ws/pmpl_utils
+RUN /root/ppl_ws/docker/ppl-dev/scripts/fix-cmake-versions.sh
+WORKDIR /root/ppl_ws/vizmo/src
+RUN make -j4 || true 
+RUN make 
+
 
 # Overwrite the entry point of the parent image.
 ENTRYPOINT []
